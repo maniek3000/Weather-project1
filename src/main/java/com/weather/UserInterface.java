@@ -1,14 +1,13 @@
 package com.weather;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
 
-    private final EntryController entryController;
+    private final LocationController locationController;
 
-    public UserInterface(EntryController entryController) {
-        this.entryController = entryController;
+    public UserInterface(LocationController locationController) {
+        this.locationController = locationController;
     }
 
     public void run() {
@@ -57,7 +56,7 @@ public class UserInterface {
         scanner.next();
         String region = scanner.nextLine();
 
-        String httpResponseBody = entryController.createNewEntry(city, country, latitude, longitude, region);
+        String httpResponseBody = locationController.createNewEntry(city, country, latitude, longitude, region);
         System.out.println("Odpowiedź z servera: " + httpResponseBody);
 
     }

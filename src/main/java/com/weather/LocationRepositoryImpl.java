@@ -7,11 +7,11 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-public class EntryRepositoryImpl implements EntryRepository{
+public class LocationRepositoryImpl implements LocationRepository {
 
     private SessionFactory sessionFactory;
 
-    public EntryRepositoryImpl() {
+    public LocationRepositoryImpl() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure()
                 .build();
@@ -22,15 +22,15 @@ public class EntryRepositoryImpl implements EntryRepository{
     }
 
     @Override
-    public Entry save(Entry entry) {
+    public Location save(Location location) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.persist(entry);
+        session.persist(location);
 
         transaction.commit();
         session.close();
 
-        return entry;
+        return location;
     }
 }

@@ -3,10 +3,10 @@ package com.weather;
 public class WeatherApplication {
 
     public static void main(String[] args) {
-        EntryRepositoryImpl entryRepositoryImpl = new EntryRepositoryImpl();
-        EntryService entryService = new EntryService(entryRepositoryImpl);
-        EntryController entryController = new EntryController(entryService);
-        UserInterface userInterface = new UserInterface(entryController);
+        LocationRepositoryImpl entryRepositoryImpl = new LocationRepositoryImpl();
+        LocationService locationService = new LocationService(entryRepositoryImpl);
+        LocationController locationController = new LocationController(locationService);
+        UserInterface userInterface = new UserInterface(locationController);
         userInterface.run();
     }
 }

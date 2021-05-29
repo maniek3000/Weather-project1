@@ -3,17 +3,17 @@ package com.weather;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class EntryService {
+public class LocationService {
 
-    private final EntryRepository entryRepository;
+    private final LocationRepository locationRepository;
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public EntryService(EntryRepository entryRepository) {
-        this.entryRepository = entryRepository;
+    public LocationService(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
         this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public Entry createNewEntry(String cityName, String countryName, Double latitude, Double longitude, String region) {
+    public Location createNewEntry(String cityName, String countryName, Double latitude, Double longitude, String region) {
         if (cityName == null || cityName.isBlank()) {
             throw new RuntimeException("Nazwa miasta nie może być pusta");
         }
@@ -26,12 +26,12 @@ public class EntryService {
         if (longitude < -180 || longitude > 180) {
             throw new IllegalArgumentException("Długość geograficzna musi się mieścić w przedziale od -180 do 180");
         }
-        if (region.isBlank()){
-            region=null;
+        if (region.isBlank()) {
+            region = null;
         }
 
-        Entry entry = new Entry(null, cityName,countryName,latitude,longitude,region);
+        Location location = new Location(null, cityName, countryName, latitude, longitude, region);
 
-        return entryRepository.save(entry);
+        return locationRepository.save(location);
     }
 }
