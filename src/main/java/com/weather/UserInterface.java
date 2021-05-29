@@ -1,10 +1,15 @@
 package com.weather;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
 
-    private EntryController entryController = new EntryController();
+    private final EntryController entryController;
+
+    public UserInterface(EntryController entryController) {
+        this.entryController = entryController;
+    }
 
     public void run() {
         System.out.println("Aplikacja jest uruchomiona!");
@@ -36,20 +41,24 @@ public class UserInterface {
         }
     }
 
-     private void addNewEntry(){
+
+
+    private void addNewEntry() {
         Scanner scanner = new Scanner(System.in);
-         System.out.println("Podaj miasto");
-         String city = scanner.nextLine();
-         System.out.println("Podaj kraj");
-         String country = scanner.nextLine();
-         System.out.println("Podaj szerokość geograficzną");
-         Double latitude = scanner.nextDouble();
-         System.out.println("Podaj długość geograficzną");
-         Double longitude = scanner.nextDouble();
-         System.out.println("Podaj region");
-         String region = scanner.nextLine();
-         String httpResponseBody = entryController.createNewEntry(city,country,latitude,longitude,region);
-         System.out.println("Odpowiedź z servera: "+ httpResponseBody);
+        System.out.println("Podaj miasto");
+        String city = scanner.nextLine();
+        System.out.println("Podaj kraj");
+        String country = scanner.nextLine();
+        System.out.println("Podaj szerokość geograficzną");
+        Double latitude = scanner.nextDouble();
+        System.out.println("Podaj długość geograficzną");
+        Double longitude = scanner.nextDouble();
+        System.out.println("Podaj region");
+        scanner.next();
+        String region = scanner.nextLine();
+
+        String httpResponseBody = entryController.createNewEntry(city, country, latitude, longitude, region);
+        System.out.println("Odpowiedź z servera: " + httpResponseBody);
 
     }
 }

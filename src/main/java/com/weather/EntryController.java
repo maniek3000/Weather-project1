@@ -4,8 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EntryController {
 
-    private EntryService entryService = new EntryService();
+    private final EntryService entryService;
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    public EntryController(EntryService entryService) {
+        this.entryService = entryService;
+    }
 
     public String createNewEntry(String cityName, String countryName, Double latitude, Double longitude, String region) {
         try {
