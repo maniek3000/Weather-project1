@@ -19,4 +19,7 @@ public class LocationController {
             return "{\"error message\": \"" + e.getMessage() + "\"}";
         }
     }
+    public void getAllLocations(){
+        locationService.getAllLocations();
+    }
 }

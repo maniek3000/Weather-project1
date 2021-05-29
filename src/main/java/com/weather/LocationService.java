@@ -2,11 +2,18 @@ package com.weather;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LocationService {
 
     private final LocationRepository locationRepository;
     private ObjectMapper objectMapper = new ObjectMapper();
+
 
     public LocationService(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
@@ -33,5 +40,10 @@ public class LocationService {
         Location location = new Location(null, cityName, countryName, latitude, longitude, region);
 
         return locationRepository.save(location);
+    }
+
+    public void getAllLocations() {
+        locationRepository.getAllLocation().forEach(System.out::println);
+        System.out.println();
     }
 }

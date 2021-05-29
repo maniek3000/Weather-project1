@@ -7,6 +7,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import javax.persistence.EntityManager;
+import java.util.List;
+
 public class LocationRepositoryImpl implements LocationRepository {
 
     private SessionFactory sessionFactory;
@@ -32,5 +35,14 @@ public class LocationRepositoryImpl implements LocationRepository {
         session.close();
 
         return location;
+    }
+
+    @Override
+    public List<Location> getAllLocation() {
+        Session session = sessionFactory.openSession();
+        List<Location> resultList = session.createNativeQuery("SELECT * FROM weather.location", Location.class).getResultList();
+        session.close();
+
+        return resultList;
     }
 }
