@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.internal.SessionImpl;
 
 import javax.persistence.EntityManager;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -46,8 +47,10 @@ public class UserInterface {
         }
     }
 
-    private void getAllLocations() {
-        locationController.getAllLocations();
+    private String getAllLocations() {
+        String string= locationController.getAllLocations();
+        System.out.println(string);
+        return string;
     }
 
 

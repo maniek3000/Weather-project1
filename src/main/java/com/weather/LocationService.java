@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,8 +44,7 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public void getAllLocations() {
-        locationRepository.getAllLocation().forEach(System.out::println);
-        System.out.println();
+    public Collection<Location> getAllLocations() {
+        return locationRepository.getAllLocation();
     }
 }
