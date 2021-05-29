@@ -8,11 +8,13 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class LocationServiceTest {
 
+
     LocationService locationService;
+    LocationRepository locationRepository;
 
     @Before
     public void setUp() {
-        LocationRepository locationRepository = new LocationRepositoryMock();
+        locationRepository = new LocationRepositoryMock();
         locationService = new LocationService(locationRepository);
     }
 
@@ -146,6 +148,24 @@ public class LocationServiceTest {
 
         //then
         assertThat(result).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void getAllLocations_listShouldBeEmpty(){
+        //when
+        //then
+        assertThat(locationRepository.getAllLocation().isEmpty()).isTrue();
+    }
+
+    @Test
+    public void getAllLocations_listSizeShouldBeCorrect(){
+        //when
+        locationService.createNewEntry("city1", "country1", 10.1, 20.2, "region1");
+        locationService.createNewEntry("city2", "country1", -56.8, 45.46, "region2");
+        locationService.createNewEntry("city3", "country2", 23.01, -165.34, "region2");
+
+        //then
+        assertThat(locationRepository.getAllLocation().size()==3).isTrue();
     }
 
 }

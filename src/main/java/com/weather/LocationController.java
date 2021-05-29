@@ -2,6 +2,9 @@ package com.weather;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Collection;
+import java.util.List;
+
 public class LocationController {
 
     private final LocationService locationService;
@@ -16,6 +19,15 @@ public class LocationController {
             Location newLocation = locationService.createNewEntry(cityName, countryName, latitude, longitude, region);
             return objectMapper.writeValueAsString(newLocation);
         } catch (Exception e) {
+            return "{\"error message\": \"" + e.getMessage() + "\"}";
+        }
+    }
+    public String getAllLocations(){
+        try{
+            Collection<Location> list= locationService.getAllLocations();
+            return objectMapper.writeValueAsString(list);
+
+        } catch (Exception e){
             return "{\"error message\": \"" + e.getMessage() + "\"}";
         }
     }

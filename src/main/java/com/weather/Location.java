@@ -17,6 +17,8 @@ public class Location {
     private Double longitude;
     private String region;
 
+    public Location() {
+    }
 
     public Location(Long id, String cityName, String countryName, Double latitude, Double longitude, String region) {
         this.id = id;
@@ -76,4 +78,15 @@ public class Location {
         this.region = region;
     }
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", cityName='" + cityName + '\'' +
+                ", countryName='" + countryName + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", region='" + region + '\'' +
+                '}';
+    }
 }

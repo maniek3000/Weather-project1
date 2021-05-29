@@ -1,10 +1,17 @@
 package com.weather;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.internal.SessionImpl;
+
+import javax.persistence.EntityManager;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class UserInterface {
 
     private final LocationController locationController;
+
+
 
     public UserInterface(LocationController locationController) {
         this.locationController = locationController;
@@ -29,7 +36,7 @@ public class UserInterface {
                     addNewEntry();
                     break;
                 case 2:
-                    //todo
+                    getAllLocations();
                     break;
                 case 3:
                     //todo
@@ -40,6 +47,11 @@ public class UserInterface {
         }
     }
 
+    private String getAllLocations() {
+        String string= locationController.getAllLocations();
+        System.out.println(string);
+        return string;
+    }
 
 
     private void addNewEntry() {
@@ -48,13 +60,13 @@ public class UserInterface {
         String city = scanner.nextLine();
         System.out.println("Podaj kraj");
         String country = scanner.nextLine();
+        System.out.println("Podaj region");
+        String region = scanner.nextLine();
         System.out.println("Podaj szerokość geograficzną");
         Double latitude = scanner.nextDouble();
         System.out.println("Podaj długość geograficzną");
         Double longitude = scanner.nextDouble();
-        System.out.println("Podaj region");
-        scanner.next();
-        String region = scanner.nextLine();
+
 
         String httpResponseBody = locationController.createNewEntry(city, country, latitude, longitude, region);
         System.out.println("Odpowiedź z servera: " + httpResponseBody);
