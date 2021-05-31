@@ -9,24 +9,20 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 public class LocationRepositoryImpl implements LocationRepository {
 
     private SessionFactory sessionFactory;
+    private Session session;
 
-    public LocationRepositoryImpl() {
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure()
-                .build();
-
-        sessionFactory = new MetadataSources(registry)
-                .buildMetadata()
-                .buildSessionFactory();
+    public LocationRepositoryImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     public Location save(Location location) {
-        Session session = sessionFactory.openSession();
+        session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         session.persist(location);
@@ -39,10 +35,21 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public List<Location> getAllLocation() {
-        Session session = sessionFactory.openSession();
-        List<Location> resultList = session.createNativeQuery("SELECT * FROM weather.location", Location.class).getResultList();
+        session = sessionFactory.openSession();
+        List<Location> resultList = session.createQuery("SELECT l FROM Location l", Location.class)
+                .getResultList();
         session.close();
 
         return resultList;
+    }
+
+    @Override
+    public Optional<Location> findById(Long id) {
+        session = sessionFactory.openSession();
+        Location location = session.createQuery("SELECT l FROM Location l WHERE l.id= :id", Location.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        session.close();
+        return Optional.of(location);
     }
 }

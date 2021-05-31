@@ -1,20 +1,16 @@
 package com.weather;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.internal.SessionImpl;
-
-import javax.persistence.EntityManager;
-import java.util.Collection;
 import java.util.Scanner;
 
 public class UserInterface {
 
     private final LocationController locationController;
+    private final ForecastControler forecastControler;
 
 
-
-    public UserInterface(LocationController locationController) {
+    public UserInterface(LocationController locationController, ForecastControler forecastControler) {
         this.locationController = locationController;
+        this.forecastControler = forecastControler;
     }
 
     public void run() {
@@ -39,7 +35,7 @@ public class UserInterface {
                     getAllLocations();
                     break;
                 case 3:
-                    //todo
+                    getForecast();
                     break;
                 case 0:
                     return;
@@ -47,8 +43,18 @@ public class UserInterface {
         }
     }
 
+    private void getForecast() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj id miasta:");
+        Long id = scanner.nextLong();
+        System.out.println("Podaj na ile dni w przód chcesz otrzymać prognozę (0- na dziś, 1- na jutro, 2- na pojutrze itd. --do 7 dni do dziś--)");
+        int day = scanner.nextInt();
+        String forecast = forecastControler.getForecast(id, day);
+        System.out.println("Odpowiedź z servera: " + forecast);
+    }
+
     private String getAllLocations() {
-        String string= locationController.getAllLocations();
+        String string = locationController.getAllLocations();
         System.out.println(string);
         return string;
     }
