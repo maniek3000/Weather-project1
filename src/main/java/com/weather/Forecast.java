@@ -33,7 +33,7 @@ public class Forecast {
     private LocalDate localDate;
 
     @ManyToOne
-    private Location location;
+       private Location location;
 
 
 

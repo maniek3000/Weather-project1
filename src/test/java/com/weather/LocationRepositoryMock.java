@@ -27,5 +27,5 @@ public class LocationRepositoryMock implements LocationRepository {
                 .findFirst();
     }
 
-    //todo mozna zrobic metode clear czyszczaca liste
+
 }

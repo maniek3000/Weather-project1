@@ -47,7 +47,7 @@ public class UserInterface {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj id miasta:");
         Long id = scanner.nextLong();
-        System.out.println("Podaj na ile dni w przód chcesz otrzymać prognozę (0- na dziś, 1- na jutro, 2- na pojutrze itd. --do 7 dni do dziś--)");
+        System.out.println("Podaj na ile dni w przód chcesz otrzymać prognozę (0- na dziś, 1- na jutro, 2- na pojutrze itd. --do 7 dni od dziś--)");
         int day = scanner.nextInt();
         String forecast = forecastControler.getForecast(id, day);
         System.out.println("Odpowiedź z servera: " + forecast);

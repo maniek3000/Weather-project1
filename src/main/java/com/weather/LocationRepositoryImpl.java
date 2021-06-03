@@ -45,11 +45,15 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public Optional<Location> findById(Long id) {
-        session = sessionFactory.openSession();
-        Location location = session.createQuery("SELECT l FROM Location l WHERE l.id= :id", Location.class)
-                .setParameter("id", id)
-                .getSingleResult();
-        session.close();
-        return Optional.of(location);
+        try {
+            session = sessionFactory.openSession();
+            Location location = session.createQuery("SELECT l FROM Location l WHERE l.id= :id", Location.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+            session.close();
+            return Optional.of(location);
+        } catch (Exception e){
+            return Optional.empty();
+        }
     }
 }

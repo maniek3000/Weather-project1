@@ -17,13 +17,17 @@ public class ForecastRepositoryImpl implements ForecastRepository {
 
     @Override
     public Optional<Forecast> findForecastByLocationAndDate(Location location, LocalDate date) {
-        session = sessionFactory.openSession();
-        Forecast forecast = session.createQuery("SELECT f FROM Forecast f INNER JOIN Location l WHERE l.id = :locationId AND f.localDate = :localDate", Forecast.class)
-                .setParameter("locationId", location.getId())
-                .setParameter("localDate", date)
-                .getSingleResult();
-        session.close();
-        return Optional.of(forecast);
+        try {
+            session = sessionFactory.openSession();
+            Forecast forecast = session.createQuery("SELECT f FROM Forecast AS f WHERE f.location.id = :locationId AND f.localDate = :localDate", Forecast.class)
+                    .setParameter("locationId", location.getId())
+                    .setParameter("localDate", date)
+                    .getSingleResult();
+            session.close();
+            return Optional.of(forecast);
+        } catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
