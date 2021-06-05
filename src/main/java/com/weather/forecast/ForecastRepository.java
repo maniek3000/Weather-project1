@@ -1,4 +1,6 @@
-package com.weather;
+package com.weather.forecast;
+
+import com.weather.location.Location;
 
 import java.time.LocalDate;
 import java.util.Optional;

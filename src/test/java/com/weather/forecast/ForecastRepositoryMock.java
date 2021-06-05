@@ -1,4 +1,8 @@
-package com.weather;
+package com.weather.forecast;
+
+import com.weather.forecast.Forecast;
+import com.weather.forecast.ForecastRepository;
+import com.weather.location.Location;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,6 +1,9 @@
-package com.weather;
+package com.weather.forecast;
 
 
+import com.weather.location.LocationRepositoryMock;
+import com.weather.location.Location;
+import com.weather.location.LocationService;
 import org.junit.Before;
 import org.junit.Test;
 

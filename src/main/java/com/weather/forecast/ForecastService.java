@@ -1,7 +1,9 @@
-package com.weather;
+package com.weather.forecast;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.weather.location.Location;
+import com.weather.location.LocationRepository;
 import lombok.RequiredArgsConstructor;
 
 
@@ -10,7 +12,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 public class ForecastService {

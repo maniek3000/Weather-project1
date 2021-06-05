@@ -1,4 +1,4 @@
-package com.weather;
+package com.weather.location;
 
 import org.junit.Before;
 import org.junit.Test;

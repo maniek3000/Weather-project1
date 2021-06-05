@@ -1,5 +1,6 @@
-package com.weather;
+package com.weather.forecast;
 
+import com.weather.location.Location;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

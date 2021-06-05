@@ -1,5 +1,8 @@
 package com.weather;
 
+import com.weather.forecast.ForecastControler;
+import com.weather.location.LocationController;
+
 import java.util.Scanner;
 
 public class UserInterface {
