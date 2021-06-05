@@ -1,7 +1,11 @@
-package com.weather;
+package com.weather.location;
+
+import com.weather.location.Location;
+import com.weather.location.LocationRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LocationRepositoryMock implements LocationRepository {
 
@@ -18,4 +22,13 @@ public class LocationRepositoryMock implements LocationRepository {
     public List<Location> getAllLocation() {
         return locations;
     }
+
+    @Override
+    public Optional<Location> findById(Long id) {
+                return locations.stream()
+                .filter(l->l.getId().equals(id))
+                .findFirst();
+    }
+
+
 }

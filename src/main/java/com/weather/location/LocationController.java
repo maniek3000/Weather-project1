@@ -1,9 +1,8 @@
-package com.weather;
+package com.weather.location;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Collection;
-import java.util.List;
 
 public class LocationController {
 
@@ -22,6 +21,7 @@ public class LocationController {
             return "{\"error message\": \"" + e.getMessage() + "\"}";
         }
     }
+
     public String getAllLocations(){
         try{
             Collection<Location> list= locationService.getAllLocations();
